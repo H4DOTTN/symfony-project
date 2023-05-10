@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Auther{% endblock %}
+
+{% block body %}
+    <h1>Auther</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ auther.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ auther.nom }}</td>
+            </tr>
+            <tr>
+                <th>Nationalite</th>
+                <td>{{ auther.nationalite }}</td>
+            </tr>
+            <tr>
+                <th>Date_naissance</th>
+                <td>{{ auther.dateNaissance ? auther.dateNaissance|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>books</th>
+                {% for book in livres %}
+                {% if book.auteur == auther %}
+                    <td>{{ book.titre  }}</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_auther_index') }}">back to list</a>
+
+    <a href="{{ path('app_auther_edit', {'id': auther.id}) }}">edit</a>
+
+    {{ include('auther/_delete_form.html.twig') }}
+{% endblock %}
